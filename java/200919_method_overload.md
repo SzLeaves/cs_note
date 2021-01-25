@@ -31,7 +31,7 @@ class Hello {
 方法重载的目的是，<u>功能类似的方法使用同一名字</u>，更容易记住  
 因此，调用起来更简单
 
-举个例子，String类提供了多个重载方法indexOf()，可以查找子串：  
+例如，String类提供了多个重载方法indexOf()，可以查找子串：  
 * `int indexOf(int ch)` 根据字符的Unicode码查找  
 * `int indexOf(String str)` 根据字符串查找  
 * `int indexOf(int ch, int fromIndex)` 根据字符查找，但指定起始位置  
@@ -40,5 +40,5 @@ class Hello {
 
 ## 小结
 * 方法重载是指多个方法的方法名相同，但各自的参数不同  
-* 重载方法应该完成类似的功能，参考String的indexOf()  
+* 重载方法应该完成类似的功能（参考String的`indexOf()`）  
 * 重载方法返回值类型应该相同  
