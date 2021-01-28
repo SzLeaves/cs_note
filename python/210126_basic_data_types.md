@@ -95,6 +95,8 @@ python中，字符串的格式化方式与**C语言中的`printf()`函数相同*
 >>> print(f'The area of a circle with radius {r} is {s:.2f}')
 The area of a circle with radius 2.5 is 19.62
 ```
+> 格式：`f'{variable}'` 或 `f'{variable: control_argument}'`
+
 上述代码中，`{r}`被变量`r`的值替换，`{s:.2f}`被变量`s`的值替换  
 并且`:`后面的`.2f`指定了格式化参数
 
