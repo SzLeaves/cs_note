@@ -98,7 +98,7 @@ The area of a circle with radius 2.5 is 19.62
 上述代码中，`{r}`被变量`r`的值替换，`{s:.2f}`被变量`s`的值替换  
 并且`:`后面的`.2f`指定了格式化参数
 
-> `f-stringing`方式中，如果字符串包含`{xxx}`，就会以对应变量替换  
+> `f-string`方式中，如果字符串包含`{xxx}`，就会以对应变量替换  
 
 ### python的字符串编码
 在最新的Python 3版本中，字符串是以Unicode编码，支持多语言，例如：
