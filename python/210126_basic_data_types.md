@@ -124,7 +124,7 @@ Python提供了`ord()`函数获取字符的整数表示
 '文'
 ```
 
-> 如果知道字符的整数编码，还可以用十六进制这么写string：
+> 如果知道字符的整数编码，还可以用十六进制这么写`str`：
 > ````python
 > >>> '\u4e2d\u6587'
 > '中文'
@@ -132,20 +132,20 @@ Python提供了`ord()`函数获取字符的整数表示
 > 两种写法完全是等价的。
 
 
-#### 字符串转换为字节`byte`
+#### 字符串`str`转换为字节`bytes`
 如果要在网络上传输，或者保存到磁盘上  
-就需要把string变为以**字节为单位的bytes**
+就需要把`str`变为以**字节为单位的`bytes`**
 
-Python对bytes类型的数据用**带b前缀的单引号或双引号**表示：
+Python对`bytes`类型的数据用**带b前缀的单引号或双引号**表示：
 ```python
 x = b'ABC'
 ```
 
 要注意区分`'ABC'`和`b'ABC'`  
-前者是string，后者虽然内容显示得和前者一样，但bytes的每个字符都只占用一个字节  
+前者是`str`，后者虽然内容显示得和前者一样，但`bytes`的每个字符都只占用一个字节  
 
 #### 字节编码`encode()`
-以Unicode表示的string通过`encode()`方法可以编码为指定的bytes，例如：
+以Unicode表示的`str`通过`encode()`方法可以编码为指定的`bytes`，例如：
 ```python
 >>> 'ABC'.encode('ascii')
 b'ABC'
@@ -159,13 +159,13 @@ position 0-1: ordinal not in range(128)
 ```
 
 > 注意到最后一句输出的报错  
-含有中文的string无法用ASCII编码，因为中文编码的范围超过了ASCII编码的范围
+含有中文的`str`无法用ASCII编码，因为中文编码的范围超过了ASCII编码的范围
 
-在bytes中，无法显示为ASCII字符的字节，用`\x##`显示。
+在`bytes`中，无法显示为ASCII字符的字节，用`\x##`显示。
 
 #### 字节解码`decode()`
 反过来，如果我们从网络或磁盘上读取了字节流  
-那么读到的数据就是bytes。要把bytes变为string，就需要用`decode()`方法：
+那么读到的数据就是`bytes`，要把`bytes`变为`str`，就需要用`decode()`方法：
 ```python
 >>> b'ABC'.decode('ascii')
 'ABC'
@@ -173,7 +173,7 @@ position 0-1: ordinal not in range(128)
 '中文'
 ```
 
-如果bytes中包含无法解码的字节，decode()方法会报错：
+如果`bytes`中包含无法解码的字节，decode()方法会报错：
 ```python
 >>> b'\xe4\xb8\xad\xff'.decode('utf-8')
 Traceback (most recent call last):
@@ -182,7 +182,7 @@ UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in
 position 3: invalid start byte
 ```
 
-如果bytes中只有一小部分无效的字节  
+如果`bytes`中只有一小部分无效的字节  
 可以传入`errors='ignore'`忽略错误的字节：
 ```python
 >>> b'\xe4\xb8\xad\xff'.decode('utf-8', errors='ignore')
@@ -190,7 +190,7 @@ position 3: invalid start byte
 ```
 
 #### 计算字符串中字符的数量
-要计算string包含多少个字符，可以用`len()`函数：
+要计算`str`包含多少个字符，可以用`len()`函数：
 ```python
 >>> len('ABC')
 3
@@ -198,7 +198,7 @@ position 3: invalid start byte
 2
 ```
 
-`len()`函数计算的是string的字符数，如果参数换成bytes，`len()`函数就计算字节数：
+`len()`函数计算的是`str`的字符数，如果参数换成`bytes`，`len()`函数就计算字节数：
 ```python
 >>> len(b'ABC')
 3
@@ -210,7 +210,7 @@ position 3: invalid start byte
 > 1个中文字符经过UTF-8编码后通常会占用3个字节  
 1个英文字符只占用1个字节
 
-> **为了避免乱码问题，应当始终坚持使用UTF-8编码对string和bytes进行转换**
+> **为了避免乱码问题，应当始终坚持使用UTF-8编码对`str`和`bytes`进行转换**
 
 #### 指定源代码文件的编码
 由于Python源代码也是一个文本文件  

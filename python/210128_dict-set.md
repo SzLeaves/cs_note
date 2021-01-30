@@ -23,7 +23,8 @@ scores = [95, 75, 85]
 >>> d['Michael']
 95
 ```
-> **格式：`dict = { key: value, ...}`**
+> **格式：`dict = { key1: value1, key2: value2, ...}`**  
+> 最常用的`key`是字符串
 
 #### 添加元素
 给一个`dict`添加元素，除了初始化时指定外，还可以通过`key`放入：
@@ -116,7 +117,7 @@ False
 > 这个通过`key`计算位置的算法称为哈希算法（Hash）
 
 **要保证hash的正确性，作为`key`的对象就不能变**  
-在Python中，字符串、整数等都是不可变的，因此，可以放心地作为`key`  
+在Python中，字符串、整数等都是不可变的，因此可以作为`key`  
 **而`list`是可变的，就不能作为`key`：**
 ```python
 >>> key = [1, 2, 3]
@@ -125,7 +126,7 @@ Traceback (most recent call last):
 File "<stdin>", line 1, in <module>
 TypeError: unhashable type: 'list'
 ```
-> `tuple`作为不可变对象，是可以放入`dict`的
+> `tuple`作为不可变对象，是可以作为`key`的
 > ````python
 > >>> d = {(1, 2): 'a, b'}
 > >>> d
@@ -226,7 +227,7 @@ TypeError: set expected at most 1 argument, got 3
 ```
 
 `set`和`dict`的唯一区别仅在于没有存储对应的`value`  
-`set`的原理和`dict`一样，所以同样不可以放入可变对象  
+`set`的原理和`dict`一样，所以同样**不可以放入可变对象**  
 ```python
 >>> s = set([1, 2, [3, 4]])
 Traceback (most recent call last):
@@ -256,12 +257,12 @@ TypeError: unhashable type: 'list'
 'abc'
 ```
 
-虽然字符串有个`replace()`方法，也确实变出了'Abc'  
+虽然字符串有个`replace()`方法，也确实“变”出了'Abc'  
 但变量a最后仍是'abc'
 
 因为`replace()`方法并没有真正改变字符串的内容  
 **在调用它的时候，它会创建一个新的字符串`'Abc'`并返回**  
-对于原来的变量`a`是没有任何影响的  
+显然，这个新字符串与原来的变量`a`是没有任何关系的  
 
 把代码改成下面这样就直观多了：
 ```python
@@ -291,20 +292,18 @@ TypeError: unhashable type: 'list'
 └───┘            └───────┘
 ```
 
-当然，如果代码改成下面这样，把`replace()`的返回值赋给`a`
+如果代码改成下面这样，把`replace()`的返回值赋给`a`
 ```python
 >>> a = a.replace('a', 'A')
 >>> a
 'Abc'
 ```
 这样也只是改变了`a`的指向，现在它指向新的字符串`Abc`  
-对于原来的字符串值`abc`来说也是没有影响的
-> 如果原来的字符串值没有了任何指向它的变量，就会被内存回收
-
-
+这个新字符串与原来的字符串`abc`也是没有关系的
+> 当然，如果原来的字符串值没有了任何指向它的变量，就会被内存回收
 
 > 对于不变对象来说，调用对象自身的任意方法，也不会改变该对象自身的内容  
-相反，这些方法会创建新的对象并返回  
+相反，这些方法会**创建新的对象并返回**  
 这样就保证了不可变对象本身永远是不可变的
 
 ## 小结
