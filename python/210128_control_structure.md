@@ -62,7 +62,7 @@ else:
 > `if`判断条件还可以简写，比如写：
 > ````python
 > if x:
-> print('True')
+>   print('True')
 > ````
 > 只要`x`是**非零数值、非空字符串、非空`list`等**，就判断为`True`，否则为`False`
 
@@ -81,6 +81,7 @@ for name in names:
 
 执行这段代码，会依次打印`names`的每一个元素：
 ```
+# output
 Michael
 Bob
 Tracy
@@ -201,17 +202,18 @@ for x in range(10):
 >     ...
 > }
 > ````
-> 在python中可以这么写：
+> 在python中可以这么写（相当于每次索引数递增1的循环）：
 > ````python
 > # python循环
 > for x in range(5)
 >     ...
 > ````
-> 如果需要每次对索引数递增n，可以用上`while`循环的实现：
+> 如果需要每次对索引数递增`n`次，可以用上`while`循环的实现：
 > ````python
 > n = 0
 > while (n < 5)
 >     ...
+>     # 每次循环对索引数递增2
 >     n = n + 2;
 > ````
 > 在使用`for x in...`结构时一定要记住，`in...`需要的是一个*迭代器对象*  
@@ -225,7 +227,7 @@ for x in range(10):
 
 * `break`语句可以在循环过程中直接退出循环  
 而`continue`语句可以提前结束本轮循环，并直接开始下一轮循环  
-这两个语句通常都必须配合`if`语句使用。
+这两个语句通常都必须配合`if`语句使用
 
 * 注意不要滥用`break`和`continue`语句  
 `break`和`continue`会造成代码执行逻辑分叉过多，容易出错
