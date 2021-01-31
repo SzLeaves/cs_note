@@ -1,7 +1,11 @@
 # 210131.调用函数 
 
 调用函数，需要知道这个函数的名称与参数：
-> 格式：`function_name(args0, args1...)`
+> **格式：`function_name(args0, args1...)`**
+
+> Python的内建(build-in)函数列表：  
+> http://docs.python.org/3/library/functions.html#abs   
+> 也可以在交互式命令行通过`help(abs)`查看abs函数的帮助信息
 
 #### 例1：调用`abs`函数：
 ```python
@@ -28,10 +32,6 @@ Traceback (most recent call last):
 File "<stdin>", line 1, in <module>
 TypeError: bad operand type for abs(): 'str'
 ```
-
-> Python的内建`build-in`函数列表：  
-> http://docs.python.org/3/library/functions.html#abs   
-> 也可以在交互式命令行通过`help(abs)`查看abs函数的帮助信息
 
 #### 例2：`max`函数  
 `max()`可以接收任意多个参数，并返回最大的那个：
@@ -65,6 +65,7 @@ True
 >>> bool('')
 False
 ```
+
 
 > **函数名其实就是指向一个函数对象的引用**  
 > 完全可以把函数名赋给一个变量，相当于给这个函数起了一个“别名”：
