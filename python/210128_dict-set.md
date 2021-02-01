@@ -121,7 +121,7 @@ False
 **而`list`是可变的，就不能作为`key`：**
 ```python
 >>> key = [1, 2, 3]
->>> d[`key`] = 'a list'
+>>> d[key] = 'a list'
 Traceback (most recent call last):
 File "<stdin>", line 1, in <module>
 TypeError: unhashable type: 'list'
