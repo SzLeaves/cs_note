@@ -29,7 +29,7 @@ def my_abs(number):
 函数定义结束后需要按两次回车重新回到`>>>`提示符下  
 >
 > 可以该文件的当前目录下启动解释器，用以下命令**导入函数**：  
-`from abstest import functions_name`  
+`from python_file import functions_name`  
 
 ## 空函数
 如果想定义一个什么事也不做的空函数，可以用`pass`语句：  
@@ -92,7 +92,7 @@ TypeError: bad operand type
 
 
 ## 返回多个值
-Python的`return`语句可以以`tuple`的形式返回多个值：
+Python的`return`语句**以`tuple`的形式**返回多个值：
 ```python
 def mulitValue(x, y, z):
     x = x + 1
