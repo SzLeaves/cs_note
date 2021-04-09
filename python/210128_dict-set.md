@@ -2,7 +2,7 @@
 
 ## `dict`
 Python内置了字典：`dict`的支持，`dict`全称dictionary  
-在其他语言中也称为`map`，**使用键-值映射（key-value）存储，具有极快的查找速度**
+``**使用键-值映射（key-value）存储，具有极快的查找速度**
 
 例：假设要根据同学的名字查找对应的成绩，如果用`list`实现，需要两个`list`：
 ```python
@@ -18,20 +18,23 @@ scores = [95, 75, 85]
 
 #### 创建`dict`
 用Python写一个`dict`如下：
+
+> **格式：`dict = { key1: value1, key2: value2, ...}`**  
+> 最常用的`key`是字符串
+
+**使用`d[key]`来直接访问`key`所对应的`value`**
 ```python
 >>> d = {'Michael': 95, 'Bob': 75, 'Tracy': 85}
 >>> d['Michael']
 95
 ```
-> **格式：`dict = { key1: value1, key2: value2, ...}`**  
-> 最常用的`key`是字符串
 
 #### 添加元素
 给一个`dict`添加元素，除了初始化时指定外，还可以通过`key`放入：
 ```python
 >>> d['Adam'] = 67
->>> d['Adam']
-67
+>>> d
+{'Michael': 95, 'Bob': 75, 'Tracy': 85, 'Adam': 67}
 ```
 > 注意：这种方式给`dict`添加元素的前提是**这个`dict`已经声明并存在**  
 如果`dict`没有被声明创建，就会报错：
@@ -42,7 +45,6 @@ scores = [95, 75, 85]
 > NameError: name 's' is not defined
 > ````
 
-
 如果`key`不存在，`dict`会报错：
 ```python
 >>> d['Thomas']
@@ -52,7 +54,7 @@ File "<stdin>", line 1, in <module>
 ```
 
 要避免`key`不存在的错误，有两种办法  
-* 一是通过in判断`key`是否存在：
+* 一是通过`in`判断`key`是否存在：
 ```python
 >>> 'Thomas' in d
 False
@@ -61,12 +63,14 @@ False
 * 二是通过`dict`提供的`get()`方法  
 如果`key`不存在，可以返回`None`，或者自己指定的`value`：
 ```python
+# key不存在时默认返回None
 >>> d.get('Thomas')
+
+# key不存在时返回-1
 >>> d.get('Thomas', -1)
 -1
 ```
-
-> 注意：返回`None`的时候Python的交互环境不显示结果
+> 注意：返回`None`的时候，**在Python的终端交互环境下不会显示结果**
 
 #### 删除元素
 要删除一个`key`，用`pop(key)`方法，对应的`value`也会从`dict`中删除：
@@ -76,7 +80,7 @@ False
 >>> d
 {'Michael': 95, 'Tracy': 85}
 ```
-> `dict`内部存放的顺序和`key`放入的顺序是没有关系的
+> **注意**：`dict`内部存放的顺序和`key`放入的顺序是没有关系的
 
 
 #### `dict`的内部原理
@@ -153,7 +157,7 @@ TypeError: unhashable type: 'list'
 > 和`dict`一样，在`set`中没有重复的`key`
 
 #### 创建`set`
-要创建一个`set`，**需要提供一个`list`或`tuple`作为输入集合：**
+要创建一个`set`，**需要提供一个<u>`iterable`</u>对象作为输入集合：**
 ```python
 # 放入list
 >>> s = set([1, 2, 3])
@@ -165,22 +169,28 @@ TypeError: unhashable type: 'list'
 >>> s
 {1, 2, 3}
 
-# 如果没有放入这两类元素中的一种，会报错：
+# 放入str
+>>> s = set('abcd')
+>>> s
+{'b', 'd', 'c', 'a'}
+```
+
+> 格式：`set_list = set( [iterable] )`
+
+如果没有放入`iterable`对象，会报错：
+```python
 >>> s = set(1, 2, 3)
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: set expected at most 1 argument, got 3
 ```
 > 注意到报错的参数`set expected at most 1 argument`  
-说明`set()`这个方法**只能传入一个参数**，也就是`list`或者`tuple`类型的参数
+这也说明`set()`只能传入一个参数
 >
-> 格式：  
-`set_list = set(list(...))`  
-`set_list = set([...])`
 
 注意：传入的参数`[1, 2, 3]`是一个`list`  
 而显示的`{1, 2, 3}`只是说明这个`set`内部有`1，2，3`这3个元素  
-显示的顺序也不表示`set`是有序的
+**显示的顺序也不表示`set`是有序的**
 
 **重复元素在`set`中自动被过滤：**
 ```python
@@ -206,13 +216,15 @@ TypeError: set expected at most 1 argument, got 3
 
 #### 添加元素
 **通过`add(key)`方法可以添加元素到`set`中**  
-可以重复添加，但不会有效果：
+可以添加`set`中已有的元素，但不会有效果：
 ```python
+>>> s = set([1, 2, 3])
+
 >>> s.add(4)
 >>> s
 {1, 2, 3, 4}
 
-# 重复添加
+# 添加重复元素
 >>> s.add(4)
 >>> s
 {1, 2, 3, 4}
@@ -246,7 +258,7 @@ TypeError: unhashable type: 'list'
 ['a', 'b', 'c']
 ```
 
-而对于不可变对象，比如string：
+而对于不可变对象，比如`str`：
 ```python
 >>> a = 'abc'
 >>> a.replace('a', 'A')
