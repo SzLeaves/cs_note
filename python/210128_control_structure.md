@@ -3,13 +3,13 @@
 ## 条件判断
 
 ### `if`,`else`
+> 格式：`if (...) : [Tabs] some sentence...`  
 ```python
 age = 20
 if age >= 18:
     print('your age is', age)
     print('adult')
 ```
-> 格式：`if (...) : [Tabs] some sentence...`  
 
 根据Python的缩进规则，如果`if`语句判断是`True`    
 就把**缩进**的两行`print`语句执行了，否则什么也不做
@@ -69,7 +69,7 @@ else:
 ### 简化的判断：三目运算符
 C与Java的判断三目运算符类似于这样：
 ```c
-result = [ Expression ] ? True_statements : False_statements
+[ Expression ] ? True_statements : False_statements
 ```  
 
 **Python的则是这样：**
@@ -94,7 +94,7 @@ for name in names:
 ```
 
 执行这段代码，会依次打印`names`的每一个元素：
-```
+```python
 # output
 Michael
 Bob
@@ -179,7 +179,7 @@ range(1, 10)
 [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
-**`range()`可以作为迭代器直接放入`for x in ...`循环中：**
+**`range()`可以作为迭代器（`iterator`）直接放入`for x in ...`循环中：**
 ```python
 for x in range(3):
     print(x)
@@ -209,30 +209,31 @@ for x in range(10):
 > `range(n)`生成的序列是一个**从0开始，小于n**的整数  
 > `range(n, m)`生成的序列是一个**从n开始，小于m**的整数
 
-> 在python的控制结构中，如果想写一个类似C/C++这样的循环：
-> ````c
-> // C/C++循环
-> for (int i = 0; i < 5; i++) {
->     ...
-> }
-> ````
-> 在python中可以这么写（相当于每次索引数递增1的循环）：
-> ````python
-> # python循环
-> for x in range(5)
->     ...
-> ````
-> 如果需要每次对索引数递增`n`次，可以用上`while`循环的实现：
-> ````python
-> n = 0
-> while (n < 5)
->     ...
->     # 每次循环对索引数递增2
->     n = n + 2;
-> ````
-> 在使用`for x in...`结构时一定要记住，`in...`需要的是一个*迭代器对象*  
-> 比如`list`,`tuple`,`range(n, m)`
+在python的控制结构中，如果想写一个类似C/C++这样的循环：
+```c
+// C/C++循环
+for (int i = 0; i < 5; i++) {
+    ...
+}
+```
 
+在python中可以这么写（相当于每次索引数递增1的循环）：
+```python
+# python循环
+for x in range(5)
+    ...
+```
+
+如果需要每次对索引数递增`n`次，可以用上`while`循环的实现：
+```python
+n = 0
+while (n < 5)
+    ...
+    # 每次循环对索引数递增2
+    n = n + 2;
+```
+在使用`for x in...`结构时一定要记住，`in...`需要的是一个*迭代器对象*  
+比如`list`,`tuple`,`range(n, m)`
 
 
 ## 小结
