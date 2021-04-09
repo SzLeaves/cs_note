@@ -66,6 +66,20 @@ else:
 > ````
 > 只要`x`是**非零数值、非空字符串、非空`list`等**，就判断为`True`，否则为`False`
 
+### 简化的判断：三目运算符
+C与Java的判断三目运算符类似于这样：
+```c
+result = [ Expression ] ? True_statements : False_statements
+```  
+
+**Python的则是这样：**
+```python
+True_statements if [ Expression ] else False_statements
+```
+
+当`[ Expression ]`的值为`True`时，执行`True_statements`的语句  
+否则执行`False_statements`的语句
+
 
 ## 循环
 
