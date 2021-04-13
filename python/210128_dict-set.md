@@ -2,7 +2,7 @@
 
 ## `dict`
 Python内置了字典：`dict`的支持，`dict`全称dictionary  
-``**使用键-值映射（key-value）存储，具有极快的查找速度**
+**使用键-值映射（key-value）存储，具有极快的查找速度**
 
 例：假设要根据同学的名字查找对应的成绩，如果用`list`实现，需要两个`list`：
 ```python
