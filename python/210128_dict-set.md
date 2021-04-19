@@ -151,6 +151,26 @@ TypeError: unhashable type: 'list'
 > `dict`中不存在重复的`key`  
 **放入相同的`key`只会把原有映射关系中对应的`value`替换掉**
 
+#### `dict`的常用方法
+先创建一个`dict`：`d = {'a': 1, 'b': 2, 'c': 3}`  
+
+* `dict.keys()`：可以获取`dict`中的所有`key`值，并以`list`返回：
+    ```python
+    >>> d.keys()
+    dict_keys(['a', 'b', 'c'])
+    ```
+
+* `dict.values`：可以获取`dict`中的所有`values`值，并以`list`返回：
+    ```python
+    >>> d.values()
+    dict_values([1, 2, 3])
+    ```
+
+* `dict.items()`: 可以获取`dict`中所有的`key-value`值，并以**二元`tuple`的形式**返回：
+    ```python
+    >>> d.items()
+    dict_items([('a', 1), ('b', 2), ('c', 3)])
+    ```
 
 ##  `set`
 `set`和`dict`类似，也是一组`key`的集合，**但不存储`value`**  

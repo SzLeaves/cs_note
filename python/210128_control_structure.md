@@ -1,5 +1,9 @@
 # 210128.控制结构
 
+Python关于`True/False`的判定：
+* **如果判断对象为`0`,`""`(空字符串),`None`，则判断结果为`False`**
+* 如果判断对象为**非空值，非`0`**，则判断结果为`True`
+
 ## 条件判断
 
 ### `if`,`else`
@@ -27,7 +31,7 @@ else:
 ```
 
 > 务必注意：
-> * **`if`和`else`后面不要少写了冒号`:`**
+> * <u>**`if`和`else`后面不要少写了冒号"`:`"**</u>
 > * **在控制语句中不要少了缩进（确保按下Tab键会缩进四个）**
 
 ### `elif`
@@ -103,7 +107,15 @@ Tracy
 
 > **注意`for x in...`后面不要少写了冒号`:`**
 
-
+`for`循环里同时引用两个变量，在Python里是很常见的：
+```python
+>>> for x, y in [(1, 1), (2, 4), (3, 9)]:
+... print(x, y)
+...
+1 1
+2 4
+3 9
+```
 
 ### `while`
 `while`循环只要条件满足，就不断循环，条件不满足时才会退出循环  
@@ -179,7 +191,7 @@ range(1, 10)
 [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
 
-**`range()`可以作为迭代器（`iterator`）直接放入`for x in ...`循环中：**
+**`range()`可以作为迭代器`（iterator）`直接放入`for x in ...`循环中：**
 ```python
 for x in range(3):
     print(x)
@@ -233,8 +245,106 @@ while (n < 5)
     # 每次循环对索引数递增2
     n = n + 2;
 ```
-在使用`for x in...`结构时一定要记住，`in...`需要的是一个*迭代器对象*  
+在使用`for x in...`结构时一定要记住，`in...`需要的是一个**迭代器`(iterator)`对象**  
 比如`list`,`tuple`,`range(n, m)`
+
+
+## 迭代 `(Iteration)`
+如果给定一个`list`或`tuple`，我们可以**通过`for`循环**来遍历这个`list`或`tuple`  
+这种遍历我们称为**迭代`（Iteration）`**  
+
+在Python中，迭代是通过`for ... in`来完成的  
+```python
+for index in list:
+    n = index
+```
+
+而很多语言（比如C），迭代`list`是通过下标完成的：
+```c
+// C 
+for (i = 0; i < list_length; i++) {
+    // 取出数组中的元素
+    n = list[i];
+}
+```
+
+可以看出，**Python的`for`循环抽象程度要高于C语言等的`for`循环**  
+因为Python的`for`循环不仅可以用在`list`或`tuple`上，还可以作用在其他可迭代对象上
+
+`list`这种数据类型虽然有下标，但很多其他数据类型是没有下标的  
+但是，**只要是可迭代对象**，无论有无下标，都可以迭代，比如`dict`就可以迭代：
+```python
+>>> d = {'a': 1, 'b': 2, 'c': 3}
+```
+```python
+>>> for key in d:
+...     print(key)
+...
+a
+c
+b
+```
+> `dict`的存储不是按照`list`的方式顺序排列，所以迭代出的结果顺序很可能不一样
+
+**默认情况下，`dict`迭代的是`key`**  
+如果要迭代`value`，可以用`for value in d.values()`  
+```python
+>>> for value in d.values():
+...     print(value)
+... 
+1
+2
+3
+```
+
+如果要同时迭代`key`和`value`，可以用`for k, v in d.items()`  
+```python
+>>> for key,value in d.items():
+...     print(key, value)
+... 
+a 1
+b 2
+c 3
+```
+
+由于字符串也是可迭代对象，因此，也可以作用于`for`循环：
+```python
+>>> for ch in 'ABC':
+...     print(ch)
+...
+A
+B
+C
+```
+
+所以，当我们使用`for`循环时，**只要作用于一个可迭代对象**，`for`循环就可以正常运行  
+而不需要太关心该对象究竟是`list`还是其他数据类型
+
+## 判断对象是否可迭代
+通过`collections`模块的`Iterable`类型判断：
+
+```python
+>>> from collections import Iterable # 导入模块
+>>> isinstance('abc', Iterable) # str是否可迭代
+True
+>>> isinstance([1,2,3], Iterable) # list是否可迭代
+True
+>>> isinstance(123, Iterable) # 整数是否可迭代
+False
+```
+
+## 实现下标索引循环
+Python内置的`enumerate`函数可以把一个`list`变成索引-元素对  
+这样就可以在`for`循环中同时迭代索引和元素本身：
+```python
+>>> for i, value in enumerate(['A', 'B', 'C']):
+...     print(i, value)
+...
+0 A
+1 B
+2 C
+```
+> 这种效果类似于C语言所使用的下标循环
 
 
 ## 小结
