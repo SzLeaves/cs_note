@@ -70,6 +70,16 @@ else:
 > ````
 > 只要`x`是**非零数值、非空字符串、非空`list`等**，就判断为`True`，否则为`False`
 
+不同的`if-else`语句可以嵌套使用，但是不建议30层以上的嵌套：
+```python
+if _expression_a:
+    if _expression_b:
+        if _expression_c:
+            ....
+        elif _expression_d:
+            ....
+```
+
 ### 简化的判断：三目运算符
 C与Java的判断三目运算符类似于这样：
 ```c
@@ -115,6 +125,32 @@ Tracy
 1 1
 2 4
 3 9
+```
+
+### `for-else`
+**只要没有使用`break`**，`for`循环正常结束后就会执行`for-else`子句：
+```python
+# 碰到break，循环提前结束，for-else子句不会执行
+for index in range(3):
+    if index == 2:
+        break
+    print(index, end=' ')
+else:
+    print('for-else子句执行')
+
+print('\n-----')
+
+# 循环正常结束，for-else子句执行
+for index in range(3):
+    print(index, end=' ')
+else:
+    print('for-else子句执行')
+```
+```
+# output
+0 1 
+-----
+0 1 2 for-else子句执行
 ```
 
 ### `while`
@@ -175,8 +211,24 @@ while n < 10:
         continue    # continue语句会直接继续下一轮循环
     print(n)
 ```
-
 执行上面的代码可以看到，打印是1，3，5，7，9
+
+### `pass`
+`pass`是空语句，是为了保持程序结构的完整性，它不做任何事情，一般用做占位语句
+```python
+for x in range(3):
+    pass
+```
+`pass`很多时候用于测试用途  
+如果在循环结构中不想写任何内容，但是不加`pass`，解释器会报语法错误
+```python
+>>> for x in range(3):
+... 
+  File "<stdin>", line 2
+    ^
+IndentationError: expected an indented block
+```
+> `pass`相当于C语言中单独使用的分隔符"`;`"，表示一个空语句
 
 ### `range()`
 **Python提供一个`range()`函数，可以生成一个整数序列：**  
@@ -248,9 +300,38 @@ while (n < 5)
 在使用`for x in...`结构时一定要记住，`in...`需要的是一个**迭代器`(iterator)`对象**  
 比如`list`,`tuple`,`range(n, m)`
 
+> **可以进行迭代的对象**，被称之为**迭代器`(Iterator)`**
+
+## 迭代器 `(Iterator)`
+
+迭代器`(Iterator)`是一个对象，它的工作是遍历并选择序列中的对象  
+它提供了一种**访问一个容器`(container)`对象中的各个元素，又不暴露对象内部细节的方法**   
+通过迭代器，开发人员不需要了解容器底层的结构，就可以实现对容器的遍历  
+由于创建迭代器的代价小，因此迭代器通常被称为轻量级的容器
+
+在Python中，**任何实现了`__iter__()`和`__next__()`方法的对象都是迭代器**  
+`__iter__`返回迭代器自身，`__next__`返回容器中的下一个值  
+如果容器中没有更多元素（比如已经遍历到容器尾部），则抛出`StopIteration`异常
+
+迭代器的特点：
+* 迭代器是一个<u>可以记住遍历的位置的对象</u>
+* 迭代器对象从集合的第一个元素开始访问，直到所有的元素被访问完结束
+* 迭代器**只能往前不会后退**
+* 迭代器有两个基本的方法：`iter()`和`next()`
+* 生成器一定是迭代器（反之不成立）
+* 可以使用迭代器进行访问的对象：
+    * 序列：字符串`(str)`、列表`(list)`、元组`(tuple)`
+    * 非序列：字典`(dict)`、文件
+    * 自定义类：用户自定义的类实现了`__iter__()`或`__next__()`方法的对象  
+
+> `__iter__()` 方法返回一个特殊的迭代器对象  
+> 这个迭代器对象实现了`__next__()`方法并通过`StopIteration`异常标识迭代的完成  
+
+> `__next__()` 方法会返回下一个迭代器对象
 
 ## 迭代 `(Iteration)`
-如果给定一个`list`或`tuple`，我们可以**通过`for`循环**来遍历这个`list`或`tuple`  
+如果给定一个`list`或`tuple`之类的**迭代器`(iterator)`**  
+我们可以**通过`for`循环**来遍历这个`list`或`tuple`  
 这种遍历我们称为**迭代`（Iteration）`**  
 
 在Python中，迭代是通过`for ... in`来完成的  
@@ -321,7 +402,7 @@ C
 而不需要太关心该对象究竟是`list`还是其他数据类型
 
 ## 判断对象是否可迭代
-通过`collections`模块的`Iterable`类型判断：
+通过`collections`模块的`Iterable`类型，使用`isinstance()`方法判断：
 
 ```python
 >>> from collections import Iterable # 导入模块
